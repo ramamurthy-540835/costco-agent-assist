@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>costco-agent-assist - Architecture Diagram</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        .mermaid { width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+    <h1>costco-agent-assist Architecture Diagram</h1>
+    <div class="mermaid">
+%%{init: {'flowchart': {'nodeSpacing': 50, 'rankSpacing': 70}}}%%
+flowchart LR
+  subgraph UI_Layer ["UI Layer"]
+    F["Real-time Analytics Dashboard
+(Next.js Frontend for KPIs & Visualizations)"]
+  end
+  subgraph API_Layer ["API Layer"]
+    E["Analytics API Backend
+(FastAPI - Serves KPIs & Insights)"]
+  end
+  subgraph Processing_Layer ["Processing Layer"]
+    A["Oracle Digital Assistant
+(Conversation Transcripts Source)"]
+    B["GCP Event Ingestion
+& Data Orchestration (e.g., Pub/Sub, Cloud Functions)"]
+  end
+  subgraph AI_Layer ["AI Layer"]
+    C["AI/ML Conversation Analysis
+(GCP AI Services for Sentiment, Entities, Lead Intelligence)"]
+  end
+  subgraph Data_Storage_Layer ["Data/Storage Layer"]
+    D["BigQuery Data Warehouse
+(Stores Raw & Processed Analytics Data)"]
+  end
+  A --> B
+  B --> C
+  B --> D
+  C --> D
+  E --> D
+  F --> E
+    </div>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</body>
+</html>
